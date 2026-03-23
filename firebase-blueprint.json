@@ -1,0 +1,59 @@
+{
+  "entities": {
+    "Service": {
+      "title": "Massage Service",
+      "description": "A type of massage service offered.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the massage type" },
+        "description": { "type": "string", "description": "Description of the service" },
+        "duration": { "type": "integer", "description": "Duration in minutes" },
+        "price": { "type": "number", "description": "Price of the service" }
+      },
+      "required": ["name", "duration", "price"]
+    },
+    "Booking": {
+      "title": "Appointment Booking",
+      "description": "A scheduled massage appointment.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "UID of the user who booked" },
+        "userEmail": { "type": "string", "description": "Email of the user" },
+        "userName": { "type": "string", "description": "Name of the user" },
+        "serviceId": { "type": "string", "description": "ID of the service booked" },
+        "serviceName": { "type": "string", "description": "Name of the service booked" },
+        "startTime": { "type": "string", "format": "date-time", "description": "Start time of the appointment" },
+        "endTime": { "type": "string", "format": "date-time", "description": "End time of the appointment" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "cancelled"], "description": "Status of the booking" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the booking was created" }
+      },
+      "required": ["userId", "serviceId", "startTime", "endTime", "status"]
+    },
+    "User": {
+      "title": "User Profile",
+      "description": "Information about a registered user.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "description": "User email address" },
+        "displayName": { "type": "string", "description": "User display name" },
+        "role": { "type": "string", "enum": ["client", "admin"], "description": "User role" }
+      },
+      "required": ["uid", "email"]
+    }
+  },
+  "firestore": {
+    "/services/{serviceId}": {
+      "schema": "Service",
+      "description": "Collection of available massage services."
+    },
+    "/bookings/{bookingId}": {
+      "schema": "Booking",
+      "description": "Collection of all appointment bookings."
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents."
+    }
+  }
+}

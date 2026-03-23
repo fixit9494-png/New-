@@ -1,0 +1,5 @@
+{
+  "name": "ZenTouch: Full Service Massage Finder",
+  "description": "Discover and book full-service massage experiences near you using real-time Google Maps data.",
+  "requestFramePermissions": ["geolocation"]
+}
